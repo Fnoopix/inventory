@@ -1,0 +1,41 @@
+<div class="row mb-2">
+  <div class="col-12">
+    <input id="deviceFileInput" style="display: none" type="file" accept="application/JSON" (change)="onFileSelect($event)" #deviceFileInput [(ngModel)]="FileInput">
+    <button id="btnSelectFile" class="btn btn-info float-right" (click)="deviceFileInput.click()">
+      <span id="btnTextSelectFile">Geräte hinzufügen</span>
+    </button>
+  </div>
+</div>
+<div *ngIf="deviceList.length > 0; else noDevices" class="row">
+  <div *ngFor="let device of deviceList; let i = index" class="col-md-3 mb-1">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">
+          <a class="card-link" [routerLink]="['detail']" [state]="device">{{device.name}}</a>
+          <span class="float-right">
+            <a class="btn btn-link text-decoration-none" (click)="onClickDelete(device)" >🗑</a>
+          </span>
+        </h5>
+        <div class="card-text">
+          <p>
+            <span class="text-capitalize text-muted">{{device.deviceTypeId}}</span>
+          </p>
+          <span>
+            <span>Failsave: </span>
+            <span *ngIf="device.failsafe; else noFailsave">✔</span>
+            <ng-template #noFailsave>
+              <span>❌</span>
+            </ng-template>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<ng-template #noDevices >
+  <div class="row">
+    <div class="col-12">
+      <p>Keine Geräte vorhanden</p>
+    </div>
+  </div>
+</ng-template>

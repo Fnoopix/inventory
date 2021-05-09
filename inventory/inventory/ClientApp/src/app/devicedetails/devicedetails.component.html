@@ -1,0 +1,58 @@
+<div *ngIf="(device | json) != ( {} | json) else noDevice" class="row mb-2">
+  <div class="col-9">
+    <h2>
+      {{device.name}}
+      <small class="text-muted">{{device.deviceTypeId}}</small>
+    </h2>
+  </div>
+  <div class="col-3">
+    <button id="btnSelectFile" class="btn btn-info float-right" [routerLink]="'/'">
+      <span id="btnTextSelectFile">zurück</span>
+    </button>
+  </div>
+</div>
+<div class="row">
+  <div class="col-12">
+    <table class="table table-bordered table-hover">
+      <thead class="thead-light">
+        <tr>
+          <th></th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody class="table-striped">
+        <tr>
+          <td>Failsafe</td>
+          <td>{{device.failsafe ? 'Ja' : 'Nein'}}</td>
+        </tr>
+        <tr>
+          <td>Temperatur</td>
+          <td>{{device.tempMin}} - {{device.tempMax}} °C</td>
+        </tr>
+        <tr>
+          <td>Einbauposition</td>
+          <td>{{device.installationPosition}}</td>
+        </tr>
+        <tr>
+          <td>Geeignet für 19" Schrank</td>
+          <td>{{device.insertInto19InchCabinet ? 'Ja' : 'Nein'}}</td>
+        </tr>
+        <tr>
+          <td>Terminal vorhanden</td>
+          <td>{{device.terminalElement ? 'Ja' : 'Nein'}}</td>
+        </tr>
+        <tr>
+          <td>Erweiterte Umgebungsbedingungen</td>
+          <td>{{device.advancedEnvironmentalConditions ? 'Ja' : 'Nein'}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<ng-template #noDevice >
+  <div class="row">
+    <div class="col-12">
+      <p>Kein Gerät gewählt!</p>
+    </div>
+  </div>
+</ng-template>
